@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { CreateItemModal } from './CreateItemModal/CreateItemModal';
+
+import { AccordionTab } from './AccordionTab';
 
 export const ApplicationsPage = () => {
   const [operationResult, setOperationResult] = useState<{
@@ -15,13 +16,27 @@ export const ApplicationsPage = () => {
 
   return (
     <div>
-      <h1>Applications Page</h1>
-      <button onClick={() => setIsModalVisible(true)}>Show Modal</button>
-      <div>{operationResult?.result}</div>
-      <CreateItemModal
-        isVisible={isModalVisible}
-        handleClose={handleOperation}
-      />
+      <h3>Applications Page</h3>
+      <details>
+        <summary>Modal button in here</summary>
+        <AccordionTab
+          openModal={() => setIsModalVisible(true)}
+          isModalVisible={isModalVisible}
+          handleOperation={handleOperation}
+        />
+      </details>
+
+      <details open>
+        <summary>Applications</summary>
+        <ul>
+          <li>Application 1</li>
+          <li>Application 2</li>
+        </ul>
+      </details>
+
+      <article>
+        <h1>{operationResult?.result || 'No Results'}</h1>
+      </article>
     </div>
   );
 };
